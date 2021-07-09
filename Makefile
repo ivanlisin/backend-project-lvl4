@@ -18,4 +18,7 @@ lint:
 publish:
 	npm publish
 
+start:
+	nodemon server/bin/server.js
+
 .PHONY: test
