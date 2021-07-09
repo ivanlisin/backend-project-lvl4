@@ -15,9 +15,6 @@ test-coverage:
 lint:
 	npx eslint .
 
-publish:
-	npm publish
-
 start:
 	nodemon server/bin/server.js
 
