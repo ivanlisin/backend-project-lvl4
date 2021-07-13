@@ -15,6 +15,9 @@ test-coverage:
 lint:
 	npx eslint .
 
+build:
+	npm run build
+
 start-backend:
 	npx nodemon --exec npx babel-node server/bin/server.js
 

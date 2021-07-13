@@ -8,7 +8,12 @@
     "node": ">=14"
   },
   "scripts": {
-    "test": "npx -n --experimental-vm-modules jest"
+    "test": "npx -n --experimental-vm-modules jest",
+    "prebuild": "rm -rf dist",
+    "build-configs": "babel webpack.config.babel.js --out-dir dist",
+    "build-server": "NODE_ENV=production babel server --out-dir dist/server --source-maps inline && cp -r server/views dist/server/views",
+    "build-frontend": "NODE_ENV=production webpack --mode production",
+    "build": "npm run build-configs && npm run build-frontend && npm run build-server"
   },
   "repository": {
     "type": "git",
