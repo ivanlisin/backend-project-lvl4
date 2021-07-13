@@ -15,7 +15,7 @@ test-coverage:
 lint:
 	npx eslint .
 
-start:
-	nodemon server/bin/server.js
+start-backend:
+	npx nodemon --exec npx babel-node server/bin/server.js
 
 .PHONY: test
