@@ -50,6 +50,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "bootstrap": "^5.0.2",
     "fastify": "^3.19.0",
     "mini-css-extract-plugin": "^2.1.0",
     "nodemon": "^2.0.10",
