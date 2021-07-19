@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-import app from '../index.js';
+import getApp from '../index.js';
 
 const port = 8080;
 
+const app = getApp();
 app.listen(port, (err, address) => {
   if (err) {
     app.log.error(err);
