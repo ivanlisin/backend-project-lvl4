@@ -2,6 +2,8 @@ import fastify from 'fastify';
 import pointOfView from 'point-of-view';
 import pug from 'pug';
 
+import addRoutes from './routes/index.js';
+
 const setUpViews = (app) => {
   app.register(pointOfView, {
     engine: {
@@ -16,10 +18,7 @@ export default () => {
   });
 
   setUpViews(app);
-
-  app.get('/', (request, reply) => {
-    reply.view('./server/views/welcome/index.pug', { text: 'text' });
-  });
+  addRoutes(app);
 
   return app;
 };
