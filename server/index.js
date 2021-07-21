@@ -1,3 +1,5 @@
+// @ts-check
+
 import fastify from 'fastify';
 import pointOfView from 'point-of-view';
 import pug from 'pug';
