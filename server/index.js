@@ -18,7 +18,7 @@ export default () => {
   setUpViews(app);
 
   app.get('/', (request, reply) => {
-    reply.view('./server/views/index.pug', { text: 'text' });
+    reply.view('./server/views/welcome/index.pug', { text: 'text' });
   });
 
   return app;
