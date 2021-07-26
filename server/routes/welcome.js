@@ -2,7 +2,7 @@
 
 export default (app) => {
   app
-    .get('/', (request, reply) => {
-      reply.view('./server/views/welcome/index.pug', { text: 'text' });
+    .get('/', { name: 'root' }, (req, reply) => {
+      reply.render('welcome/index');
     });
 };

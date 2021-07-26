@@ -12,6 +12,10 @@ const setUpViews = (app) => {
       pug,
     },
   });
+
+  app.decorateReply('render', function render(viewPath, locals) {
+    this.view(viewPath, { ...locals, reply: this });
+  });
 };
 
 export default () => {
