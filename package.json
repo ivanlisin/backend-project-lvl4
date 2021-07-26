@@ -53,6 +53,7 @@
   "dependencies": {
     "bootstrap": "^5.0.2",
     "fastify": "^3.19.0",
+    "fastify-static": "^4.2.2",
     "mini-css-extract-plugin": "^2.1.0",
     "point-of-view": "^4.15.1",
     "pug": "^3.0.2",
