@@ -6,6 +6,7 @@ import pug from 'pug';
 import path from 'path';
 import fastifyStatic from 'fastify-static';
 import { plugin as fastifyReverseRoutes } from 'fastify-reverse-routes';
+import fastifyErrorPage from 'fastify-error-page';
 import i18next from 'i18next';
 
 import addRoutes from './routes/index.js';
@@ -62,6 +63,9 @@ const setupLocalization = () => {
 };
 
 const registerPlugins = (app) => {
+  if (isDevelopment) {
+    app.register(fastifyErrorPage);
+  }
   app.register(fastifyReverseRoutes);
 };
 

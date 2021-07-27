@@ -53,6 +53,7 @@
   "dependencies": {
     "bootstrap": "^5.0.2",
     "fastify": "^3.19.0",
+    "fastify-error-page": "^4.0.0",
     "fastify-reverse-routes": "^3.0.0",
     "fastify-static": "^4.2.2",
     "i18next": "^20.3.5",
