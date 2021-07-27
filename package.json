@@ -53,7 +53,9 @@
   "dependencies": {
     "bootstrap": "^5.0.2",
     "fastify": "^3.19.0",
+    "fastify-reverse-routes": "^3.0.0",
     "fastify-static": "^4.2.2",
+    "i18next": "^20.3.5",
     "mini-css-extract-plugin": "^2.1.0",
     "point-of-view": "^4.15.1",
     "pug": "^3.0.2",

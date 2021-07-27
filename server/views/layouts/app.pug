@@ -1,7 +1,32 @@
 doctype html
-html(lang="ru")
+html(lang="en")
   head
-    title Task manager
+    title= t('appName')
     script(src=assetPath('main.js'))
     link(href=assetPath('main.css') rel="stylesheet")
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
   body.d-flex.flex-column.min-vh-100
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-3
+      .container-fluid
+        a.navbar-brand(href=route('root'))= t('appName')
+        button.navbar-toggler(data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent")
+          span.navbar-toggler-icon
+        .collapse.navbar-collapse(id="navbarToggleExternalContent")
+          .container-fluid
+            ul.navbar-nav.mr-auto
+              li.nav-item
+                a.nav-link(href=route('users'))= t('layouts.app.users')
+          ul.navbar-nav
+            li.nav-item
+              a.nav-link(href=route('newSession'))= t('layouts.app.signIn')
+            li.nav-item
+              a.nav-link(href=route('newUser'))= t('layouts.app.signUp')
+    .container.wrapper.flex-grow-1
+
+      h1.my-4
+        block header
+      block content
+
+    footer
+      .container.my-5.pt-4.border-top
+        a(target="_blank" href="https://github.com/ivanlisin/backend-project-lvl4")= t('source')

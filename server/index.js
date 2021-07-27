@@ -5,8 +5,12 @@ import pointOfView from 'point-of-view';
 import pug from 'pug';
 import path from 'path';
 import fastifyStatic from 'fastify-static';
+import { plugin as fastifyReverseRoutes } from 'fastify-reverse-routes';
+import i18next from 'i18next';
 
 import addRoutes from './routes/index.js';
+import getHelpers from './helpers/index.js';
+import ru from './locales/ru.js';
 // @ts-ignore
 import webpackConfig from '../webpack.config.babel.js';
 
@@ -18,11 +22,13 @@ const setUpViews = (app) => {
   const { devServer } = webpackConfig;
   const devHost = `http://${devServer.host}:${devServer.port}`;
   const domain = isDevelopment ? devHost : '';
+  const helpers = getHelpers(app);
   app.register(pointOfView, {
     engine: {
       pug,
     },
     defaultContext: {
+      ...helpers,
       assetPath: (filename) => `${domain}/assets/${filename}`,
     },
     templates: path.join(__dirname, '..', 'server', 'views'),
@@ -43,11 +49,30 @@ const setUpStaticAssets = (app) => {
   });
 };
 
+const setupLocalization = () => {
+  i18next
+    .init({
+      lng: 'ru',
+      fallbackLng: 'en',
+      debug: isDevelopment,
+      resources: {
+        ru,
+      },
+    });
+};
+
+const registerPlugins = (app) => {
+  app.register(fastifyReverseRoutes);
+};
+
 export default () => {
   const app = fastify({
     logger: true,
   });
 
+  registerPlugins(app);
+
+  setupLocalization();
   setUpViews(app);
   setUpStaticAssets(app);
   addRoutes(app);
