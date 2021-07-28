@@ -1,14 +1,14 @@
 doctype html
 html(lang="en")
   head
-    title= t('appName')
+    title= t('layouts.app.name')
     script(src=assetPath('main.js'))
     link(href=assetPath('main.css') rel="stylesheet")
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
   body.d-flex.flex-column.min-vh-100
     nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-3
       .container-fluid
-        a.navbar-brand(href=route('root'))= t('appName')
+        a.navbar-brand(href=route('root'))= t('layouts.app.name')
         button.navbar-toggler(data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent")
           span.navbar-toggler-icon
         .collapse.navbar-collapse(id="navbarToggleExternalContent")
@@ -29,4 +29,4 @@ html(lang="en")
 
     footer
       .container.my-5.pt-4.border-top
-        a(target="_blank" href="https://github.com/ivanlisin/backend-project-lvl4")= t('source')
+        a(target="_blank" href="https://github.com/ivanlisin/backend-project-lvl4")= t('layouts.app.source')

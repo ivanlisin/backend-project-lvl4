@@ -2,15 +2,15 @@
 
 module.exports = {
   translation: {
-    appName: 'Менеджер задач',
     layouts: {
       app: {
+        name: 'Менеджер задач',
         users: 'Пользователи',
         signIn: 'Вход',
         signUp: 'Регистрация',
         signOut: 'Выход',
+        source: 'Исходный код',
       },
     },
-    source: 'Исходный код',
   },
 };
