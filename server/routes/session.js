@@ -3,6 +3,6 @@
 export default (app) => {
   app
     .get('/session/new', { name: 'newSession' }, (req, reply) => {
-      reply.code(404).type('text/html').send('Not Found');
+      reply.notFound('The page is under construction');
     });
 };

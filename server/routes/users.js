@@ -3,9 +3,9 @@
 export default (app) => {
   app
     .get('/users', { name: 'users' }, (req, reply) => {
-      reply.code(404).type('text/html').send('Not Found');
+      reply.notFound('The page is under construction');
     })
     .get('/users/new', { name: 'newUser' }, (req, reply) => {
-      reply.code(404).type('text/html').send('Not Found');
+      reply.notFound('The page is under construction');
     });
 };
