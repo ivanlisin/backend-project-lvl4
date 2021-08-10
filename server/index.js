@@ -8,10 +8,13 @@ import fastifyStatic from 'fastify-static';
 import { plugin as fastifyReverseRoutes } from 'fastify-reverse-routes';
 import fastifyErrorPage from 'fastify-error-page';
 import fastifySensible from 'fastify-sensible';
+import fastifyObjectionjs from 'fastify-objectionjs';
 import i18next from 'i18next';
 
 import addRoutes from './routes/index.js';
 import getHelpers from './helpers/index.js';
+import knexConfig from '../knexfile.js';
+import models from './models/index.js';
 import ru from './locales/ru.js';
 // @ts-ignore
 import webpackConfig from '../webpack.config.babel.js';
@@ -69,6 +72,10 @@ const registerPlugins = (app) => {
   }
   app.register(fastifyReverseRoutes);
   app.register(fastifySensible);
+  app.register(fastifyObjectionjs, {
+    knexConfig: knexConfig[mode],
+    models,
+  });
 };
 
 export default () => {

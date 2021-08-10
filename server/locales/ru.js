@@ -12,5 +12,12 @@ module.exports = {
         source: 'Исходный код',
       },
     },
+    views: {
+      users: {
+        id: 'ID',
+        email: 'Email',
+        createdAt: 'Дата создания',
+      },
+    },
   },
 };
