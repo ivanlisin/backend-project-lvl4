@@ -2,7 +2,7 @@
 
 import getApp from '../index.js';
 
-const port = 8080;
+const port = 5000;
 
 const app = getApp();
 app.listen(port, (err, address) => {
