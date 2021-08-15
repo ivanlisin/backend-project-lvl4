@@ -5,6 +5,9 @@ setup:
 build:
 	npm run build
 
+start:
+	heroku local -f Procfile.dev
+
 start-frontend:
 	npx webpack serve
 
