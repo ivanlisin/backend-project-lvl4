@@ -15,4 +15,4 @@ $ make setup
 
 ```sh
 $ make start
-# Open localhost:8080
+# Open localhost:5000
