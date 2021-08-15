@@ -11,6 +11,7 @@ module.exports = {
   },
   devServer: {
     host: 'localhost',
+    contentBase: path.join(__dirname, 'dist', 'public'),
     publicPath: '/assets/',
     port: 8080,
     compress: true,
