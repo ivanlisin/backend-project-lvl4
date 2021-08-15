@@ -11,6 +11,12 @@
 $ make setup
 ```
 
+## Build
+
+```sh
+$ make build
+```
+
 ## Run
 
 ```sh
