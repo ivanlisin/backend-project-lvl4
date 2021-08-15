@@ -18,9 +18,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install
+      - name: Setup & build
         run: |
-          make install
+          make setup
+          make build
         env:
           CI: true
       - name: Run linter
