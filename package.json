@@ -10,6 +10,7 @@
       "prebuild": "rm -rf dist",
       "test": "jest --verbose --runInBand",
       "build": "webpack",
+      "prestart": "./server/bin/session-key.js",
       "start": "fastify start server/plugin.js -l debug -P -o"
    },
    "jest": {
