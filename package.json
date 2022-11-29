@@ -1,8 +1,8 @@
 {
-   "name": "fastify-nodejs-application",
+   "name": "@hexlet/code",
    "version": "0.1.0",
    "type": "module",
-   "description": "fastify-nodejs-application",
+   "description": "task manager",
    "engines": {
       "node": ">=16.x"
    },
@@ -20,7 +20,7 @@
          "dotenv/config"
       ]
    },
-   "author": "Stanislav Dzisiak",
+   "author": "Ivan Lisin <ivanlisin.tech@gmail.com>",
    "license": "ISC",
    "repository": {
       "type": "git",
