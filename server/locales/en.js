@@ -46,13 +46,6 @@ export default {
           signUp: 'Register',
         },
       },
-      welcome: {
-        index: {
-          hello: 'Hello from Hexlet!',
-          description: 'Online programming school',
-          more: 'Learn more',
-        },
-      },
     },
   },
 };
