@@ -3,8 +3,11 @@ extends ../layouts/application.pug
 block header
   = t('views.users.new.signUp')
 
+// TODO: заменить firstName, lastName, email, password на соотвествующие t(...)
 block content
   +formFor()(action=route('users') method='post')
+    +input(user, 'firstName', errors)(type="text")
+    +input(user, 'lastName', errors)(type="text")
     +input(user, 'email', errors)(type="text")
     +input(user, 'password', errors)(type="password")
     +submit(user)(value=t('views.users.new.submit'))
