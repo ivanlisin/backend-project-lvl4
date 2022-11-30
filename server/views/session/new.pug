@@ -3,8 +3,8 @@ extends ../layouts/application.pug
 block header
   = t('views.session.new.signIn')
 
-// TODO: email и password заменить на t('...email') и t('...password')
 block content
+  // TODO: email и password заменить на t('...email') и t('...password')
   +formFor()(action=route('session') method='post')
     +input(signInForm, 'email', errors)(type="text")
     +input(signInForm, 'password')(type="password")
