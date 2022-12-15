@@ -15,3 +15,7 @@ block content
           td= `${user.firstName} ${user.lastName}`
           td= user.email
           td= formatDate(user.createdAt)
+          td
+            .d-flex.flex-row
+              a(href=`/users/${user.id}/edit` class='btn btn-link')= t('views.users.edit.button')
+              +buttonTo(`/users/${user.id}`, 'delete')(class='btn btn-link link-danger' value=t('views.users.delete'))

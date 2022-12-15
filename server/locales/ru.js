@@ -18,8 +18,17 @@ export default {
           error: 'Не удалось зарегистрировать',
           success: 'Пользователь успешно зарегистрирован',
         },
+        edit: {
+          error: 'Не удалось обновить данные',
+          success: 'Данные успешно обновлены',
+        },
+        delete: {
+          error: 'Не удалось удалить пользователя',
+          success: 'Пользователь успешно удален',
+        },
       },
       authError: 'Доступ запрещён! Пожалуйста, авторизируйтесь',
+      accessError: 'У вас нет доступа',
     },
     layouts: {
       application: {
@@ -38,14 +47,20 @@ export default {
       },
       users: {
         id: 'ID',
+        firstName: 'Имя',
+        lastName: 'Фамилия',
         fullName: 'Полное имя',
         email: 'Email',
+        password: 'Пароль',
         createdAt: 'Дата создания',
         new: {
           submit: 'Сохранить',
           signUp: 'Регистрация',
         },
-        edit: 'Изменить',
+        edit: {
+          title: 'Изменить данные пользователя',
+          button: 'Изменить',
+        },
         delete: 'Удалить',
       },
     },
