@@ -5,7 +5,7 @@ import os from 'os';
 import { exec } from 'child_process';
 import { promises as fs } from 'fs';
 import path from 'path';
-import { set } from '../lib/env-file.js';
+import { get, set } from '../lib/env-file.js';
 
 const __dirname = fileURLToPath(path.dirname(import.meta.url));
 
@@ -28,6 +28,10 @@ exec(`npx @fastify/secure-session > ${tmpFilePath}`, async (error, stdout, stder
     text = await fs.readFile(envFilePath, 'utf-8');
   } catch {
     text = '';
+  }
+  const hasSessionKey = get(text, 'SESSION_KEY') !== null;
+  if (hasSessionKey) {
+    return;
   }
   await fs.writeFile(envFilePath, set(text, 'SESSION_KEY', hexString));
   await fs.unlink(tmpFilePath);

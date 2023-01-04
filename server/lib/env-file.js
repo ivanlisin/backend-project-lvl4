@@ -11,6 +11,13 @@ export const parse = (text) => text
     return acc;
   }, {});
 
+export const get = (text, key, emptyValue = null) => {
+  const obj = parse(text);
+  return key in obj
+    ? obj[key]
+    : emptyValue;
+};
+
 export const stringify = (obj) => Object.entries(obj)
   .map(([key, value]) => `${key}="${value}"`)
   .join('\n');
