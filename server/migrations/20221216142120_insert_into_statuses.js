@@ -9,4 +9,5 @@ export const up = (knex) => (
   ])
 );
 
-export const down = (knex) => knex.schema.dropTable('statuses');
+// TODO: разобраться с этим
+export const down = (_knex) => {};
