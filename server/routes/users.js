@@ -40,6 +40,7 @@ export default (app) => {
 
       return reply;
     })
+    // TODO: добавить валидацию новых данных
     .patch('/users/:id', { preValidation: app.authenticate }, async (req, reply) => {
       const pageId = Number(req.params.id);
       const userId = Number(req.user.id);

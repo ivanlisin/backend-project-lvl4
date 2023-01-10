@@ -18,6 +18,7 @@ export default {
           error: 'Failed to register',
           success: 'User registered successfully',
         },
+        // TODO: дописать сообщения
         edit: {
           error: 'Failed to update the data',
           success: 'The data is successfully updated',
@@ -27,12 +28,27 @@ export default {
           success: 'The user is successfully deleted',
         },
       },
+      statuses: {
+        create: {
+          error: 'Failed to create status',
+          success: 'Status created successfully',
+        },
+        edit: {
+          error: 'Failed to update status data',
+          success: 'Status data updated successfully',
+        },
+        delete: {
+          error: 'Failed to delete status',
+          success: 'Status deleted successfully',
+        },
+      },
       authError: 'Access denied! Please login',
       accessError: 'You do not have access',
     },
     layouts: {
       application: {
         users: 'Users',
+        statuses: 'Statuses',
         signIn: 'Login',
         signUp: 'Register',
         signOut: 'Logout',
@@ -62,6 +78,18 @@ export default {
           button: 'Edit',
         },
         delete: 'Delete',
+      },
+      statuses: {
+        id: 'ID',
+        name: 'Name',
+        new: {
+          title: 'Create status',
+          button: 'Create',
+        },
+        edit: {
+          title: 'Edit status data',
+          button: 'Edit',
+        },
       },
     },
   },
