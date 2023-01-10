@@ -18,10 +18,9 @@ export default {
           error: 'Failed to register',
           success: 'User registered successfully',
         },
-        // TODO: дописать сообщения
         edit: {
-          error: 'Failed to update the data',
-          success: 'The data is successfully updated',
+          error: 'Failed to update the user data',
+          success: 'The user data is successfully updated',
         },
         delete: {
           error: 'Failed to delete the user',
@@ -34,6 +33,7 @@ export default {
           success: 'Status created successfully',
         },
         edit: {
+          notFound: 'Status not found',
           error: 'Failed to update status data',
           success: 'Status data updated successfully',
         },

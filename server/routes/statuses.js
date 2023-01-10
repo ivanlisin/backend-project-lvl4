@@ -13,10 +13,14 @@ export default (app) => {
       const status = new app.objection.models.status();
       reply.render('statuses/new', { status });
     })
-    // TODO: добавить проверку на существование записи в бд по id
     .get('/statuses/:id/edit', { preValidation: app.authenticate }, async (req, reply) => {
       const pageId = Number(req.params.id);
       const status = await app.objection.models.status.query().findById(pageId);
+      if (!status) {
+        req.flash('info', i18next.t('flash.statuses.edit.notFound'));
+        reply.redirect(app.reverse('statuses'));
+        return reply;
+      }
       reply.render('statuses/edit', { pageId, status });
       return reply;
     })
