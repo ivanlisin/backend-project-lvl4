@@ -9,9 +9,6 @@ db-migrate:
 load-data:
 	npx knex seed:run
 
-debug-data:
-	./server/bin/users.js
-
 build:
 	npm run build
 
