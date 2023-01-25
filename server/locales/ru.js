@@ -69,6 +69,7 @@ export default {
         email: 'Email',
         password: 'Пароль',
         createdAt: 'Дата создания',
+        title: 'Пользователи',
         new: {
           submit: 'Сохранить',
           signUp: 'Регистрация',
@@ -82,6 +83,7 @@ export default {
       statuses: {
         id: 'ID',
         name: 'Наименование',
+        title: 'Статусы',
         new: {
           title: 'Создать статус',
           button: 'Создать',

@@ -69,6 +69,7 @@ export default {
         email: 'Email',
         password: 'Password',
         createdAt: 'Created at',
+        title: 'Users',
         new: {
           submit: 'Register',
           signUp: 'Register',
@@ -82,6 +83,7 @@ export default {
       statuses: {
         id: 'ID',
         name: 'Name',
+        title: 'Statuses',
         new: {
           title: 'Create status',
           button: 'Create',
