@@ -31,6 +31,12 @@ module.exports = class User extends unique(BaseModel) {
     };
   }
 
+  // TODO: implement
+  // https://vincit.github.io/objection.js/guide/models.html#examples:~:text=fullName()%20%7B%0A%20%20%20%20return%20this.firstName%20%2B%20%27%20%27%20%2B%20this.lastName%3B%0A%20%20%7D
+  // fullName() {
+  //   return this.firstName + ' ' + this.lastName;
+  // }
+
   set password(value) {
     this.passwordDigest = encrypt(value);
   }

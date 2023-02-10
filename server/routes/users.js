@@ -67,6 +67,7 @@ export default (app) => {
 
       return reply;
     })
+    // TODO: Если пользователь связан хотя бы с одной задачей, его нельзя удалить
     .delete('/users/:id', { preValidation: app.authenticate }, async (req, reply) => {
       const pageId = Number(req.params.id);
       const userId = Number(req.user.id);

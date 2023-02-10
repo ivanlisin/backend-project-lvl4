@@ -42,6 +42,12 @@ export default {
           success: 'Status deleted successfully',
         },
       },
+      tasks: {
+        create: {
+          error: 'Failed to create task',
+          success: 'Task created successfully',
+        },
+      },
       authError: 'Access denied! Please login',
       accessError: 'You do not have access',
     },
@@ -49,6 +55,7 @@ export default {
       application: {
         users: 'Users',
         statuses: 'Statuses',
+        tasks: 'Tasks',
         signIn: 'Login',
         signUp: 'Register',
         signOut: 'Logout',

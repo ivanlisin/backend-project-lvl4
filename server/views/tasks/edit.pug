@@ -1,0 +1,10 @@
+extends ../layouts/application.pug
+
+block header
+  = t('views.tasks.settings')
+
+block content
+  +formFor()(action=`/tasks/${id}` method='post')
+    +input(status, 'name', t('views.tasks.name'), errors)(type="text")
+    +overrideMethod('patch')
+    +submit(status)(value=t('views.tasks.edit'))

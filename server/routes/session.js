@@ -8,6 +8,7 @@ export default (app) => {
       const signInForm = {};
       reply.render('session/new', { signInForm });
     })
+    // TODO: добавить проверку на существование пользователя
     .post('/session', { name: 'session' }, app.fp.authenticate('form', async (req, reply, err, user) => {
       if (err) {
         return app.httpErrors.internalServerError(err);

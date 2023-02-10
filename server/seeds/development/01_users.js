@@ -2,6 +2,7 @@ import secure from '../../lib/secure.cjs';
 
 // eslint-disable-next-line import/prefer-default-export
 export const seed = async (knex) => {
+  // TODO: fix delete
   await knex('users').delete();
   await knex('users').insert([
     {

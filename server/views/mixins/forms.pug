@@ -1,5 +1,5 @@
-- const getInputName = (property) => `data[${property}]`
-- const getInputId = (property) => `data_${property}`
+- const getFieldName = (property) => `data[${property}]`
+- const getFieldId = (property) => `data_${property}`
 
 mixin formFor(entity = null)
   form&attributes(attributes)
@@ -8,20 +8,56 @@ mixin formFor(entity = null)
 mixin input(entity, propertyName, labelName, errors = {})
   - propertyErrors = _.get(errors, propertyName)
   - classLine = 'form-control' + (_.isEmpty(propertyErrors) ? '' : ' is-invalid')
-  - inputId = getInputId(propertyName)
+  - inputId = getFieldId(propertyName)
   .mb-3(class=(errors[propertyName] && 'has-danger'))
     label(
       for= inputId
     )= labelName
     input(
       id= inputId
-      name=getInputName(propertyName)
+      name=getFieldName(propertyName)
       class=classLine
       value=_.get(entity, propertyName, '')
     )&attributes(attributes)
     if !_.isEmpty(propertyErrors)
       .invalid-feedback= propertyErrors.map(({ message }) => message).join('. ')
 
+mixin textarea(entity, propertyName, labelName)
+  - propertyErrors = _.get(errors, propertyName)
+  - classLine = 'form-control' + (_.isEmpty(propertyErrors) ? '' : ' is-invalid')
+  - textareaId = getFieldId(propertyName)
+  .mb-3
+    label(
+      for= textareaId
+    )= labelName
+    textarea(
+      id=textareaId
+      name=getFieldName(propertyName)
+      class=classLine
+      rows='3'
+    )&attributes(attributes)= _.get(entity, propertyName, '')
+    if !_.isEmpty(propertyErrors)
+      .invalid-feedback= propertyErrors.map(({ message }) => message).join('. ')
+
+mixin select(entity, propertyName, labelName)
+  - propertyErrors = _.get(errors, propertyName)
+  - classLine = 'form-control' + (_.isEmpty(propertyErrors) ? '' : ' is-invalid')
+  - selectId = getFieldId(propertyName)
+  .mb-3
+    label(
+      for= selectId
+    )= labelName
+    select(
+      id=selectId
+      name= getFieldName(propertyName)
+      class=classLine
+    )&attributes(attributes)
+      // options
+      block
+    if !_.isEmpty(propertyErrors)
+      .invalid-feedback= propertyErrors.map(({ message }) => message).join('. ')
+
+// TODO: переписать
 mixin submit(form = null, method = 'post')
   input(name="_method" type="hidden" value=method)
   input(class='btn btn-primary' type='submit')&attributes(attributes)

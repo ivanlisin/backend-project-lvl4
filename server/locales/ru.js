@@ -42,6 +42,12 @@ export default {
           success: 'Статус успешно удален',
         },
       },
+      tasks: {
+        create: {
+          error: 'Не удалось создать задачу',
+          success: 'Задача успешно создана',
+        },
+      },
       authError: 'Доступ запрещён! Пожалуйста, авторизируйтесь',
       accessError: 'У вас нет доступа',
     },
@@ -49,6 +55,7 @@ export default {
       application: {
         users: 'Пользователи',
         statuses: 'Статусы',
+        tasks: 'Задачи',
         signIn: 'Вход',
         signUp: 'Регистрация',
         signOut: 'Выход',
@@ -92,6 +99,24 @@ export default {
           title: 'Изменить данные статуса',
           button: 'Изменить',
         },
+      },
+      tasks: {
+        id: 'ID',
+        name: 'Наименование',
+        description: 'Описание',
+        status: 'Статус',
+        creator: 'Создатель',
+        executor: 'Исполнитель',
+        createdAt: 'Дата создания',
+        title: 'Задачи',
+        new: {
+          title: 'Создание задачи',
+          button: 'Создать',
+        },
+        edit: {
+          button: 'Изменить',
+        },
+        delete: 'Удалить',
       },
     },
   },
