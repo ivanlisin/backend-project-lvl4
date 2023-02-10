@@ -14,9 +14,9 @@ block content
     +select(task, 'creatorId', t('views.tasks.creator'))
       option(value= null)
       each user in users
-        option(value= user.id)= `${user.firstName} ${user.lastName}`
+        option(value= user.id)= user.fullName()
     +select(task, 'executorId', t('views.tasks.executor'))
       option(value= null)
       each user in users
-        option(value= user.id)= `${user.firstName} ${user.lastName}`
+        option(value= user.id)= user.fullName()
     +submit(task)(value=t('views.tasks.new.button'))

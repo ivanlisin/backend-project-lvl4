@@ -20,8 +20,8 @@ block content
           td= task.id
           td= task.name
           td= task.status.name
-          td= `${task.creator.firstName} ${task.creator.lastName}`
-          td= task.executor === null ? '' : `${task.executor.firstName} ${task.executor.lastName}`
+          td= task.creator.fullName()
+          td= task.executor === null ? '' : task.executor.fullName()
           td= task.createdAt
           td
             .d-flex.flex-row
