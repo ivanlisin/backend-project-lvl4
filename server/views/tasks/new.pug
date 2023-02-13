@@ -7,16 +7,7 @@ block content
   +formFor()(action=route('tasks') method='post')
     +input(task, 'name', t('views.tasks.name'), errors)(type='text')
     +textarea(task, 'description', t('views.tasks.description'))
-    +select(task, 'statusId', t('views.tasks.status'))
-      option(value= null)
-      each status in statuses
-        option(value= status.id)= status.name
-    +select(task, 'creatorId', t('views.tasks.creator'))
-      option(value= null)
-      each user in users
-        option(value= user.id)= user.fullName()
-    +select(task, 'executorId', t('views.tasks.executor'))
-      option(value= null)
-      each user in users
-        option(value= user.id)= user.fullName()
+    +select(task, 'statusId', t('views.tasks.status'), selectOptions.statuses)
+    +select(task, 'creatorId', t('views.tasks.creator'), selectOptions.users)
+    +select(task, 'executorId', t('views.tasks.executor'), selectOptions.users)
     +submit(task)(value=t('views.tasks.new.button'))

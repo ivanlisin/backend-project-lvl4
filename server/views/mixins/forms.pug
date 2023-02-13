@@ -39,7 +39,7 @@ mixin textarea(entity, propertyName, labelName)
     if !_.isEmpty(propertyErrors)
       .invalid-feedback= propertyErrors.map(({ message }) => message).join('. ')
 
-mixin select(entity, propertyName, labelName)
+mixin select(entity, propertyName, labelName, options)
   - propertyErrors = _.get(errors, propertyName)
   - classLine = 'form-control' + (_.isEmpty(propertyErrors) ? '' : ' is-invalid')
   - selectId = getFieldId(propertyName)
@@ -52,8 +52,12 @@ mixin select(entity, propertyName, labelName)
       name= getFieldName(propertyName)
       class=classLine
     )&attributes(attributes)
-      // options
-      block
+      option(value= null)
+      each option in options
+        option(
+          value=option.value
+          selected=task[propertyName] === option.value
+        )= option.text
     if !_.isEmpty(propertyErrors)
       .invalid-feedback= propertyErrors.map(({ message }) => message).join('. ')
 

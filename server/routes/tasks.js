@@ -2,6 +2,17 @@
 
 import i18next from 'i18next';
 
+const prepareForSelect = (entities, valueGetter, textGetter) => entities
+  .map((entity) => {
+    const value = valueGetter.type === 'method'
+      ? entity[valueGetter.key]()
+      : entity[valueGetter.key];
+    const text = textGetter.type === 'method'
+      ? entity[textGetter.key]()
+      : entity[textGetter.key];
+    return { value, text };
+  });
+
 export default (app) => {
   app
     .get('/tasks', { name: 'tasks', preValidation: app.authenticate }, async (req, reply) => {
@@ -14,8 +25,19 @@ export default (app) => {
       const task = new app.objection.models.task();
       const statuses = await app.objection.models.status.query();
       const users = await app.objection.models.user.query();
-      console.log(users);
-      reply.render('tasks/new', { task, statuses, users });
+      const selectOptions = {
+        statuses: prepareForSelect(
+          statuses,
+          { type: 'field', key: 'id' },
+          { type: 'field', key: 'name' },
+        ),
+        users: prepareForSelect(
+          users,
+          { type: 'field', key: 'id' },
+          { type: 'method', key: 'fullName' },
+        ),
+      };
+      reply.render('tasks/new', { task, selectOptions });
       return reply;
     })
     .get('/tasks/:id/edit', { preValidation: app.authenticate }, async (req, reply) => {
@@ -41,9 +63,20 @@ export default (app) => {
         task.$set(data);
         const statuses = await app.objection.models.status.query();
         const users = await app.objection.models.user.query();
-        const locals = { task, statuses, users };
+        const selectOptions = {
+          statuses: prepareForSelect(
+            statuses,
+            { type: 'field', key: 'id' },
+            { type: 'field', key: 'name' },
+          ),
+          users: prepareForSelect(
+            users,
+            { type: 'field', key: 'id' },
+            { type: 'method', key: 'fullName' },
+          ),
+        };
         req.flash('error', i18next.t('flash.tasks.create.error'));
-        reply.render('tasks/new', { ...locals, errors: e.data });
+        reply.render('tasks/new', { task, selectOptions, errors: e.data });
       }
       return reply;
     })
