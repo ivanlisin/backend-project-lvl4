@@ -1,6 +1,6 @@
 # backend-project-lvl4
 
-[![Node CI](https://github.com/hexlet-boilerplates/fastify-nodejs-application/workflows/Node%20CI/badge.svg)](https://github.com/hexlet-boilerplates/fastify-nodejs-application/actions)
+[![Node CI](https://github.com/ivanlisin/backend-project-lvl4/actions/workflows/nodejs.yml/badge.svg)](https://github.com/ivanlisin/backend-project-lvl4/actions/workflows/nodejs.yml)
 
 ## Setup
 
