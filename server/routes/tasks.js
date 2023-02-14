@@ -43,7 +43,21 @@ export default (app) => {
     .get('/tasks/:id/edit', { preValidation: app.authenticate }, async (req, reply) => {
       const { id } = req.params;
       const task = await app.objection.models.task.query().findById(id);
-      reply.render('tasks/edit', { id, task });
+      const statuses = await app.objection.models.status.query();
+      const users = await app.objection.models.user.query();
+      const selectOptions = {
+        statuses: prepareForSelect(
+          statuses,
+          { type: 'field', key: 'id' },
+          { type: 'field', key: 'name' },
+        ),
+        users: prepareForSelect(
+          users,
+          { type: 'field', key: 'id' },
+          { type: 'method', key: 'fullName' },
+        ),
+      };
+      reply.render('tasks/edit', { id, task, selectOptions });
       return reply;
     })
     .post('/tasks', { preValidation: app.authenticate }, async (req, reply) => {
@@ -77,6 +91,26 @@ export default (app) => {
         };
         req.flash('error', i18next.t('flash.tasks.create.error'));
         reply.render('tasks/new', { task, selectOptions, errors: e.data });
+      }
+      return reply;
+    })
+    // TODO: добавить валидацию новых данных
+    .patch('/tasks/:id', { preValidation: app.authenticate }, async (req, reply) => {
+      const { data } = req.body;
+      ['statusId', 'creatorId', 'executorId'].forEach((key) => {
+        const str = data[key];
+        data[key] = parseInt(str, 10);
+      });
+      try {
+        const pageId = Number(req.params.id);
+        const task = await app.objection.models.task.query().findById(pageId);
+        await task.$query().patch({ ...data });
+        req.flash('info', i18next.t('flash.tasks.edit.success'));
+        reply.redirect(app.reverse('tasks'));
+      } catch (e) {
+        console.error(e);
+        req.flash('error', i18next.t('flash.tasks.edit.error'));
+        reply.render('tasks/edit', { task: data, errors: e.data });
       }
       return reply;
     })
