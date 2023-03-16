@@ -2,6 +2,8 @@
 
 [![Node CI](https://github.com/ivanlisin/backend-project-lvl4/actions/workflows/nodejs.yml/badge.svg)](https://github.com/ivanlisin/backend-project-lvl4/actions/workflows/nodejs.yml)
 
+[![hexlet-check](https://github.com/ivanlisin/backend-project-lvl4/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/ivanlisin/backend-project-lvl4/actions/workflows/hexlet-check.yml)
+
 ## Setup
 
 ```bash
