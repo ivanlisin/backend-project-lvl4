@@ -80,7 +80,6 @@ describe('test statuses CRUD', () => {
     });
 
     expect(response.statusCode).toBe(302);
-    console.log(params);
     const expected = {
       ...params,
     };
