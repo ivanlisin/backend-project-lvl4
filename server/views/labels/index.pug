@@ -1,0 +1,23 @@
+extends ../layouts/application.pug
+
+block header
+  = t('views.labels.title')
+
+block content
+  a.btn.btn-primary(href=route('newLabel'))= t('views.labels.new.button')
+  table.table.table-striped
+    thead
+      tr
+        th= t('views.labels.id')
+        th= t('views.labels.name')
+        th= t('views.labels.createdAt')
+    tbody
+      each label in labels
+        tr
+          td= label.id
+          td= label.name
+          td= formatDate(label.createdAt)
+          td
+            .d-flex.flex-row
+              a.btn.btn-link(href=`/labels/${label.id}/edit`)= t('views.labels.edit.button')
+              +buttonTo(`/labels/${label.id}`, 'delete')(class='btn btn-link link-danger' value=t('views.labels.delete'))

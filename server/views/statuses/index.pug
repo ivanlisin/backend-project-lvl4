@@ -10,7 +10,7 @@ block content
       tr
         th= t('views.statuses.id')
         th= t('views.statuses.name')
-        th= t('views.users.createdAt')
+        th= t('views.statuses.createdAt')
     tbody
       each status in statuses
         tr
@@ -19,5 +19,5 @@ block content
           td= formatDate(status.createdAt)
           td
             .d-flex.flex-row
-              a.btn.btn-link(href=`/statuses/${status.id}/edit`)= t('views.users.edit.button')
-              +buttonTo(`/statuses/${status.id}`, 'delete')(class='btn btn-link link-danger' value=t('views.users.delete'))
+              a.btn.btn-link(href=`/statuses/${status.id}/edit`)= t('views.statuses.edit.button')
+              +buttonTo(`/statuses/${status.id}`, 'delete')(class='btn btn-link link-danger' value=t('views.statuses.delete'))

@@ -42,6 +42,21 @@ export default {
           success: 'Статус успешно удален',
         },
       },
+      labels: {
+        create: {
+          error: 'Не удалось создать метку',
+          success: 'Метка успешно создана',
+        },
+        edit: {
+          notFound: 'Метка не найдена',
+          error: 'Не удалось обновить данные метки',
+          success: 'Данные метки успешно обновлены',
+        },
+        delete: {
+          error: 'Не удалось удалить метку',
+          success: 'Метка успешно удалена',
+        },
+      },
       tasks: {
         info: {
           error: 'Задачи не существует',
@@ -67,6 +82,7 @@ export default {
       application: {
         users: 'Пользователи',
         statuses: 'Статусы',
+        labels: 'Метки',
         tasks: 'Задачи',
         signIn: 'Вход',
         signUp: 'Регистрация',
@@ -102,6 +118,7 @@ export default {
       statuses: {
         id: 'ID',
         name: 'Наименование',
+        createdAt: 'Дата создания',
         title: 'Статусы',
         new: {
           title: 'Создать статус',
@@ -111,6 +128,22 @@ export default {
           title: 'Изменить данные статуса',
           button: 'Изменить',
         },
+        delete: 'Удалить',
+      },
+      labels: {
+        id: 'ID',
+        name: 'Наименование',
+        createdAt: 'Дата создания',
+        title: 'Метки',
+        new: {
+          title: 'Создать метку',
+          button: 'Создать',
+        },
+        edit: {
+          title: 'Изменить данные метки',
+          button: 'Изменить',
+        },
+        delete: 'Удалить',
       },
       tasks: {
         id: 'ID',

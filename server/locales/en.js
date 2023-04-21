@@ -42,6 +42,21 @@ export default {
           success: 'Status deleted successfully',
         },
       },
+      labels: {
+        create: {
+          error: 'Failed to create label',
+          success: 'Label created successfully',
+        },
+        edit: {
+          notFound: 'Label not found',
+          error: 'Failed to update label data',
+          success: 'Label data updated successfully',
+        },
+        delete: {
+          error: 'Failed to delete label',
+          success: 'Label deleted successfully',
+        },
+      },
       tasks: {
         info: {
           error: 'Task does not exist',
@@ -67,6 +82,7 @@ export default {
       application: {
         users: 'Users',
         statuses: 'Statuses',
+        labels: 'Labels',
         tasks: 'Tasks',
         signIn: 'Login',
         signUp: 'Register',
@@ -102,6 +118,7 @@ export default {
       statuses: {
         id: 'ID',
         name: 'Name',
+        createdAt: 'Created at',
         title: 'Statuses',
         new: {
           title: 'Create status',
@@ -111,6 +128,22 @@ export default {
           title: 'Edit status data',
           button: 'Edit',
         },
+        delete: 'Delete',
+      },
+      labels: {
+        id: 'ID',
+        name: 'Name',
+        createdAt: 'Created at',
+        title: 'Labels',
+        new: {
+          title: 'Create label',
+          button: 'Create',
+        },
+        edit: {
+          title: 'Edit label data',
+          button: 'Edit',
+        },
+        delete: 'Delete',
       },
       tasks: {
         id: 'ID',
