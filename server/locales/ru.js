@@ -43,6 +43,9 @@ export default {
         },
       },
       tasks: {
+        info: {
+          error: 'Задачи не существует',
+        },
         create: {
           error: 'Не удалось создать задачу',
           success: 'Задача успешно создана',

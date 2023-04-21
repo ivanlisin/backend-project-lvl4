@@ -43,6 +43,9 @@ export default {
         },
       },
       tasks: {
+        info: {
+          error: 'Task does not exist',
+        },
         create: {
           error: 'Failed to create task',
           success: 'Task created successfully',

@@ -1,5 +1,6 @@
 // @ts-check
 
+import _ from 'lodash';
 import i18next from 'i18next';
 
 const prepareForSelect = (entities, valueGetter, textGetter) => entities
@@ -40,6 +41,18 @@ export default (app) => {
       reply.render('tasks/new', { task, selectOptions });
       return reply;
     })
+    .get('/tasks/:id', { preValidation: app.authenticate }, async (req, reply) => {
+      const { id } = req.params;
+      const task = await app.objection.models.task.query().findById(id)
+        .withGraphFetched('[status, creator, executor]');
+      if (_.isUndefined(task)) {
+        req.flash('error', i18next.t('flash.tasks.info.error'));
+        reply.redirect(app.reverse('tasks'));
+        return reply;
+      }
+      reply.render('tasks/info', { task });
+      return reply;
+    })
     .get('/tasks/:id/edit', { preValidation: app.authenticate }, async (req, reply) => {
       const { id } = req.params;
       const task = await app.objection.models.task.query().findById(id);
@@ -69,7 +82,7 @@ export default (app) => {
       try {
         const validTask = await app.objection.models.task.fromJson(data);
         await app.objection.models.task.query().insert(validTask);
-        req.flash('info', i18next.t('flash.statuses.create.success'));
+        req.flash('info', i18next.t('flash.tasks.create.success'));
         reply.redirect(app.reverse('tasks'));
       } catch (e) {
         console.error(e);
