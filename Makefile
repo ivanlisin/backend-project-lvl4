@@ -1,9 +1,9 @@
-setup: prepare install db-migrate
+setup: prepare install migrate
 
 install:
 	npm install
 
-db-migrate:
+migrate:
 	npx knex migrate:latest
 
 load-data:
