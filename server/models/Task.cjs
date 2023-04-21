@@ -10,6 +10,7 @@ module.exports = class Task extends BaseModel {
 
   static get relationMappings() {
     const Status = require('./Status.cjs');
+    const Label = require('./Label.cjs');
     const User = require('./User.cjs');
     return {
       status: {
@@ -19,6 +20,14 @@ module.exports = class Task extends BaseModel {
           from: 'tasks.statusId',
           to: 'statuses.id',
         },
+      },
+      label: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Label,
+        join: {
+          from: 'tasks.labelId',
+          to: 'label.id',
+        }
       },
       creator: {
         relation: Model.BelongsToOneRelation,
@@ -46,6 +55,7 @@ module.exports = class Task extends BaseModel {
         'name',
         'description',
         'statusId',
+        'labelId',
         'creatorId',
         'executorId',
       ],
@@ -54,6 +64,7 @@ module.exports = class Task extends BaseModel {
         name: { type: 'string', minLength: 1 },
         description: { type: 'string' },
         statusId: { type: 'integer' },
+        labelId: { type: 'integer' },
         creatorId: { type: 'integer' },
         executorId: { type: 'integer' },
       },
