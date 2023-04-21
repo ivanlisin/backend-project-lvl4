@@ -15,10 +15,11 @@ block content
         span= task.creator.fullName()
       .d-flex.flex-wrap.mb-3
         span.text-muted.me-2= t('views.tasks.executor')
-        span= task.executor.fullName()
+        if task.executor !== null
+          span= task.executor.fullName()
       .d-flex.flex-wrap.mb-3
         span.text-muted.me-2= t('views.tasks.createdAt')
-        span.text-muted.me-2= task.executor.createdAt
+        span.text-muted.me-2= task.createdAt
       .d-flex.flex-wrap
         a.btn.btn-primary.me-1(href=`/tasks/${task.id}/edit`)= t('views.tasks.edit.button')
         +buttonTo(`/tasks/${task.id}`, 'delete')(class='btn btn-danger' value=t('views.tasks.delete'))
