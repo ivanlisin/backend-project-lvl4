@@ -18,7 +18,8 @@ block content
       each task in tasks
         tr
           td= task.id
-          td= task.name
+          td
+            a(href=`/tasks/${task.id}`)= task.name
           td= task.status.name
           td= task.creator.fullName()
           td= task.executor === null ? '' : task.executor.fullName()
