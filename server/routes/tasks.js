@@ -3,16 +3,21 @@
 import _ from 'lodash';
 import i18next from 'i18next';
 
-const prepareForSelect = (entities, valueGetter, textGetter) => entities
-  .map((entity) => {
-    const value = valueGetter.type === 'method'
-      ? entity[valueGetter.key]()
-      : entity[valueGetter.key];
-    const text = textGetter.type === 'method'
-      ? entity[textGetter.key]()
-      : entity[textGetter.key];
+const prepareDataForSelects = async (app) => {
+  const statuses = await app.objection.models.status.query();
+  const users = await app.objection.models.user.query();
+  const statusSelectData = statuses.map((status) => {
+    const value = status.id;
+    const text = status.name;
     return { value, text };
   });
+  const userSelectData = users.map((user) => {
+    const value = user.id;
+    const text = user.fullName();
+    return { value, text };
+  });
+  return { statusSelectData, userSelectData };
+};
 
 export default (app) => {
   app
@@ -24,21 +29,12 @@ export default (app) => {
     })
     .get('/tasks/new', { name: 'newTask', preValidation: app.authenticate }, async (req, reply) => {
       const task = new app.objection.models.task();
-      const statuses = await app.objection.models.status.query();
-      const users = await app.objection.models.user.query();
-      const selectOptions = {
-        statuses: prepareForSelect(
-          statuses,
-          { type: 'field', key: 'id' },
-          { type: 'field', key: 'name' },
-        ),
-        users: prepareForSelect(
-          users,
-          { type: 'field', key: 'id' },
-          { type: 'method', key: 'fullName' },
-        ),
-      };
-      reply.render('tasks/new', { task, selectOptions });
+      const { statusSelectData, userSelectData } = await prepareDataForSelects(app);
+      reply.render('tasks/new', {
+        task,
+        statusSelectData,
+        userSelectData,
+      });
       return reply;
     })
     .get('/tasks/:id', { preValidation: app.authenticate }, async (req, reply) => {
@@ -56,21 +52,13 @@ export default (app) => {
     .get('/tasks/:id/edit', { preValidation: app.authenticate }, async (req, reply) => {
       const { id } = req.params;
       const task = await app.objection.models.task.query().findById(id);
-      const statuses = await app.objection.models.status.query();
-      const users = await app.objection.models.user.query();
-      const selectOptions = {
-        statuses: prepareForSelect(
-          statuses,
-          { type: 'field', key: 'id' },
-          { type: 'field', key: 'name' },
-        ),
-        users: prepareForSelect(
-          users,
-          { type: 'field', key: 'id' },
-          { type: 'method', key: 'fullName' },
-        ),
-      };
-      reply.render('tasks/edit', { id, task, selectOptions });
+      const { statusSelectData, userSelectData } = await prepareDataForSelects(app);
+      reply.render('tasks/edit', {
+        id,
+        task,
+        statusSelectData,
+        userSelectData,
+      });
       return reply;
     })
     .post('/tasks', { preValidation: app.authenticate }, async (req, reply) => {
@@ -88,22 +76,14 @@ export default (app) => {
         console.error(e);
         const task = new app.objection.models.task();
         task.$set(data);
-        const statuses = await app.objection.models.status.query();
-        const users = await app.objection.models.user.query();
-        const selectOptions = {
-          statuses: prepareForSelect(
-            statuses,
-            { type: 'field', key: 'id' },
-            { type: 'field', key: 'name' },
-          ),
-          users: prepareForSelect(
-            users,
-            { type: 'field', key: 'id' },
-            { type: 'method', key: 'fullName' },
-          ),
-        };
+        const { statusSelectData, userSelectData } = await prepareDataForSelects(app);
         req.flash('error', i18next.t('flash.tasks.create.error'));
-        reply.render('tasks/new', { task, selectOptions, errors: e.data });
+        reply.render('tasks/new', {
+          task,
+          statusSelectData,
+          userSelectData,
+          errors: e.data,
+        });
       }
       return reply;
     })
