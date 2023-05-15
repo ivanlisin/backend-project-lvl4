@@ -2,10 +2,23 @@
 
 const BaseModel = require('./BaseModel.cjs');
 const { Model } = require('objection');
+const _ = require('lodash');
 
 module.exports = class Task extends BaseModel {
   static get tableName() {
     return 'tasks';
+  }
+
+  $parseJson(json, opt) {
+    json = super.$parseJson(json, opt);
+    ['statusId', 'labelId', 'creatorId', 'executorId'].forEach((key) => {
+      if (!_.has(json, key)) {
+        return;
+      }
+      const str = json[key];
+      json[key] = parseInt(str, 10);
+    });
+    return json;
   }
 
   static get relationMappings() {

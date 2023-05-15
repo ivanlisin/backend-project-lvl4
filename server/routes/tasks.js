@@ -63,19 +63,16 @@ export default (app) => {
     })
     .post('/tasks', { preValidation: app.authenticate }, async (req, reply) => {
       const { data } = req.body;
-      ['statusId', 'creatorId', 'executorId'].forEach((key) => {
-        const str = data[key];
-        data[key] = parseInt(str, 10);
-      });
+      const task = new app.objection.models.task();
+      task.$set(data);
+      const json = await task.$toJson();
       try {
-        const validTask = await app.objection.models.task.fromJson(data);
+        const validTask = await app.objection.models.task.fromJson(json);
         await app.objection.models.task.query().insert(validTask);
         req.flash('info', i18next.t('flash.tasks.create.success'));
         reply.redirect(app.reverse('tasks'));
       } catch (e) {
         console.error(e);
-        const task = new app.objection.models.task();
-        task.$set(data);
         const { statusSelectData, userSelectData } = await prepareDataForSelects(app);
         req.flash('error', i18next.t('flash.tasks.create.error'));
         reply.render('tasks/new', {
@@ -90,20 +87,19 @@ export default (app) => {
     // TODO: добавить валидацию новых данных
     .patch('/tasks/:id', { preValidation: app.authenticate }, async (req, reply) => {
       const { data } = req.body;
-      ['statusId', 'creatorId', 'executorId'].forEach((key) => {
-        const str = data[key];
-        data[key] = parseInt(str, 10);
-      });
+      const patch = new app.objection.models.task();
+      patch.$set(data);
+      const json = await patch.$toJson();
       try {
         const pageId = Number(req.params.id);
         const task = await app.objection.models.task.query().findById(pageId);
-        await task.$query().patch({ ...data });
+        await task.$query().patch({ ...json });
         req.flash('info', i18next.t('flash.tasks.edit.success'));
         reply.redirect(app.reverse('tasks'));
       } catch (e) {
         console.error(e);
         req.flash('error', i18next.t('flash.tasks.edit.error'));
-        reply.render('tasks/edit', { task: data, errors: e.data });
+        reply.render('tasks/edit', { task: json, errors: e.data });
       }
       return reply;
     })
