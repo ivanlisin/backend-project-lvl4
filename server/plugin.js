@@ -125,6 +125,12 @@ const registerPlugins = async (app) => {
 
 export const options = {
   exposeHeadRoutes: false,
+  ...['FASTIFY_ADDRESS', 'FASTIFY_PORT']
+    .reduce((acc, key) => (
+      key in process.env
+        ? { ...acc, [key]: process.env[key] }
+        : { ...acc }
+    ), {}),
 };
 
 // eslint-disable-next-line no-unused-vars
