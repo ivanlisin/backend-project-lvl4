@@ -6,6 +6,7 @@ import i18next from 'i18next';
 const prepareDataForSelects = async (app) => {
   const statuses = await app.objection.models.status.query();
   const users = await app.objection.models.user.query();
+  const labels = await app.objection.models.label.query();
   const statusSelectData = statuses.map((status) => {
     const value = status.id;
     const text = status.name;
@@ -16,7 +17,13 @@ const prepareDataForSelects = async (app) => {
     const text = user.fullName();
     return { value, text };
   });
-  return { statusSelectData, userSelectData };
+  const labelSelectData = labels.map((label) => {
+    const value = label.id;
+    const text = label.name;
+    console.log({ value, text });
+    return { value, text };
+  });
+  return { statusSelectData, userSelectData, labelSelectData };
 };
 
 export default (app) => {
@@ -29,11 +36,10 @@ export default (app) => {
     })
     .get('/tasks/new', { name: 'newTask', preValidation: app.authenticate }, async (req, reply) => {
       const task = new app.objection.models.task();
-      const { statusSelectData, userSelectData } = await prepareDataForSelects(app);
+      const dataForSelects = await prepareDataForSelects(app);
       reply.render('tasks/new', {
         task,
-        statusSelectData,
-        userSelectData,
+        ...dataForSelects,
       });
       return reply;
     })
@@ -52,12 +58,11 @@ export default (app) => {
     .get('/tasks/:id/edit', { preValidation: app.authenticate }, async (req, reply) => {
       const { id } = req.params;
       const task = await app.objection.models.task.query().findById(id);
-      const { statusSelectData, userSelectData } = await prepareDataForSelects(app);
+      const dataForSelects = await prepareDataForSelects(app);
       reply.render('tasks/edit', {
         id,
         task,
-        statusSelectData,
-        userSelectData,
+        ...dataForSelects,
       });
       return reply;
     })
@@ -73,12 +78,11 @@ export default (app) => {
         reply.redirect(app.reverse('tasks'));
       } catch (e) {
         console.error(e);
-        const { statusSelectData, userSelectData } = await prepareDataForSelects(app);
+        const dataForSelects = await prepareDataForSelects(app);
         req.flash('error', i18next.t('flash.tasks.create.error'));
         reply.render('tasks/new', {
           task,
-          statusSelectData,
-          userSelectData,
+          dataForSelects,
           errors: e.data,
         });
       }

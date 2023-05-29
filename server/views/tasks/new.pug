@@ -9,4 +9,5 @@ block content
     +textarea(task, 'description', t('views.tasks.description'))
     +select(task, 'statusId', t('views.tasks.status'), statusSelectData)
     +select(task, 'executorId', t('views.tasks.executor'), userSelectData)
+    +select(task, 'labelId', t('views.tasks.label'), labelSelectData)('multiple')
     +submit(task)(value=t('views.tasks.new.button'))

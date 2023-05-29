@@ -152,6 +152,7 @@ export default {
         status: 'Статус',
         creator: 'Создатель',
         executor: 'Исполнитель',
+        label: 'Метка',
         createdAt: 'Дата создания',
         title: 'Задачи',
         new: {

@@ -152,6 +152,7 @@ export default {
         status: 'Status',
         creator: 'Creator',
         executor: 'Executor',
+        label: 'Label',
         createdAt: 'Created at',
         title: 'Tasks',
         new: {
