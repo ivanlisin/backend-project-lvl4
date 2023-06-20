@@ -19,4 +19,4 @@ $ make start
 
 ## Already deploy
 
-[Go to site](https://backend-project-lvl4-production-be7d.up.railway.app/)
+Адрес деплоя указан в секции about
