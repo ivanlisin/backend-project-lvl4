@@ -20,7 +20,6 @@ const prepareDataForSelects = async (app) => {
   const labelSelectData = labels.map((label) => {
     const value = label.id;
     const text = label.name;
-    console.log({ value, text });
     return { value, text };
   });
   return { statusSelectData, userSelectData, labelSelectData };
