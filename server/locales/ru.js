@@ -96,6 +96,13 @@ export default {
           submit: 'Войти',
         },
       },
+      welcome: {
+        public: {
+          title: 'Здравствуйте',
+          message: 'Для продолжения необходимо:',
+          link: 'Войти в аккаунт',
+        },
+      },
       users: {
         id: 'ID',
         firstName: 'Имя',

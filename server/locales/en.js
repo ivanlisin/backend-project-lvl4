@@ -96,6 +96,13 @@ export default {
           submit: 'Login',
         },
       },
+      welcome: {
+        public: {
+          title: 'Hello',
+          message: 'To continue, you need:',
+          link: 'Sign in',
+        },
+      },
       users: {
         id: 'ID',
         firstName: 'First name',

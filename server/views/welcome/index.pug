@@ -1,3 +1,13 @@
 extends ../layouts/application.pug
 
+block header
+  h1.display-6= t('views.welcome.public.title')
+
 block content
+  .d-flex.flex-column.align-items-center
+    .d-flex.justify-content-center
+      h2= t('views.welcome.public.message')
+    .d-flex.justify-content-center
+      a.link-primary(href=route('newSession'))
+        h2= t('views.welcome.public.link')
+
