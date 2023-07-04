@@ -66,9 +66,10 @@ export default (app) => {
       return reply;
     })
     .post('/tasks', { preValidation: app.authenticate }, async (req, reply) => {
+      const { user } = req;
       const { data } = req.body;
       const task = new app.objection.models.task();
-      task.$set(data);
+      task.$set({ ...data, creatorId: user.id });
       const json = await task.$toJson();
       try {
         const validTask = await app.objection.models.task.fromJson(json);
