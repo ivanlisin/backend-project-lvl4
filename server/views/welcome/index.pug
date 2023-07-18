@@ -1,11 +1,11 @@
 extends ../layouts/application.pug
 
 block header
-  h1.display-6= t('views.welcome.public.title')
+  = t('views.welcome.public.title')
 
 block content
   if !isAuthenticated()
-    .d-flex.flex-column.flex-grow-1.justify-content-center
+    +centerize
       .d-flex.justify-content-center
         h2= t('views.welcome.public.message')
       .d-flex.justify-content-center
