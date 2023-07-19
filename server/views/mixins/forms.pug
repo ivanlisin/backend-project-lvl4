@@ -56,7 +56,7 @@ mixin select(entity, propertyName, labelName, options)
       each option in options
         option(
           value=option.value
-          selected=task[propertyName] === option.value
+          selected=entity[propertyName] === option.value
         )= option.text
     if !_.isEmpty(propertyErrors)
       .invalid-feedback= propertyErrors.map(({ message }) => message).join('. ')
@@ -70,3 +70,10 @@ mixin buttonTo(action, method)
   form(action=action, method="post")
     input(name="_method" type="hidden" value=method)
     input(type='submit')&attributes(attributes)
+
+mixin filter(action, method)
+  .card.shadow-sm&attributes(attributes)
+    .card-body.p-4
+      form(action=action, method=method)
+        block
+      input.btn.btn-primary(type='submit' value=t('Pokazat'))
