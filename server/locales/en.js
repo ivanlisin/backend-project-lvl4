@@ -99,8 +99,7 @@ export default {
       welcome: {
         public: {
           title: 'Hello',
-          message: 'To continue, you need:',
-          link: 'Sign in',
+          message: 'To use all the features of the manager, log in to your account. If you don\'t have an account, please register.',
         },
       },
       users: {

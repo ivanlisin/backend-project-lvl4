@@ -5,9 +5,7 @@ block header
 
 block content
   if !isAuthenticated()
-    +centerize
-      .d-flex.justify-content-center
-        h2= t('views.welcome.public.message')
-      .d-flex.justify-content-center
-        a.link-primary(href=route('newSession'))
-          h2= t('views.welcome.public.link')
+    .d-flex.justify-content-center
+      .card
+        .card-body
+          h2= t('views.welcome.public.message')
