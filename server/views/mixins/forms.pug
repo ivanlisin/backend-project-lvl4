@@ -61,6 +61,29 @@ mixin select(entity, propertyName, labelName, options)
     if !_.isEmpty(propertyErrors)
       .invalid-feedback= propertyErrors.map(({ message }) => message).join('. ')
 
+mixin inlineSelect(entity, propertyName, labelName, options)
+  - propertyErrors = _.get(errors, propertyName)
+  - classLine = 'form-control' + (_.isEmpty(propertyErrors) ? '' : ' is-invalid')
+  - selectId = getFieldId(propertyName)
+  .input-group.mb-3
+    label(
+      for= selectId
+      class = 'input-group-text'
+    )= labelName
+    select(
+      id=selectId
+      name= getFieldName(propertyName)
+      class=classLine
+    )&attributes(attributes)
+      option(value= null)
+      each option in options
+        option(
+          value=option.value
+          selected=entity[propertyName] === option.value
+        )= option.text
+    if !_.isEmpty(propertyErrors)
+      .invalid-feedback= propertyErrors.map(({ message }) => message).join('. ')
+
 // TODO: переписать
 mixin submit(form = null, method = 'post')
   input(name="_method" type="hidden" value=method)
@@ -76,4 +99,4 @@ mixin filter(action, method)
     .card-body.p-4
       form(action=action, method=method)
         block
-      input.btn.btn-primary(type='submit' value=t('Pokazat'))
+        input.btn.btn-primary(type='submit' value=t('Pokazat'))
