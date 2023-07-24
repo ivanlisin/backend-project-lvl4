@@ -39,39 +39,14 @@ mixin textarea(entity, propertyName, labelName)
     if !_.isEmpty(propertyErrors)
       .invalid-feedback= propertyErrors.map(({ message }) => message).join('. ')
 
-mixin select(entity, propertyName, labelName, options)
+mixin select(entity, propertyName, labelName, options, inlineStyle = false)
   - propertyErrors = _.get(errors, propertyName)
   - classLine = 'form-control' + (_.isEmpty(propertyErrors) ? '' : ' is-invalid')
   - selectId = getFieldId(propertyName)
-  .mb-3
+  .mb-3(class = inlineStyle ? 'input-group' : '')
     label(
       for= selectId
-    )= labelName
-    select(
-      id=selectId
-      name= getFieldName(propertyName)
-      class=classLine
-    )&attributes(attributes)
-      option(value= null)
-      each option in options
-        option(
-          value=option.value
-          selected=entity[propertyName] === option.value
-        )= option.text
-    if !_.isEmpty(propertyErrors)
-      .invalid-feedback= propertyErrors.map(({ message }) => message).join('. ')
-
-mixin columnSelect(entity, propertyName, labelName, options)
-  +select(entity, propertyName, labelName, options)&attributes(attributes)
-
-mixin inlineSelect(entity, propertyName, labelName, options)
-  - propertyErrors = _.get(errors, propertyName)
-  - classLine = 'form-control' + (_.isEmpty(propertyErrors) ? '' : ' is-invalid')
-  - selectId = getFieldId(propertyName)
-  .input-group.mb-3
-    label(
-      for= selectId
-      class = 'input-group-text'
+      class = inlineStyle ? 'input-group-text' : ''
     )= labelName
     select(
       id=selectId
