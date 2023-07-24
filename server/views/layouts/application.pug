@@ -35,7 +35,7 @@ html(lang="en")
                 a.nav-link(href=route('newSession'))= t('layouts.application.signIn')
               li.nav-item
                 a.nav-link(href=route('newUser'))= t('layouts.application.signUp')
-    .container.wrapper.d-flex.flex-column.flex-grow-1
+    .container.wrapper.flex-grow-1
 
       each messages, type in reply.flash() || []
         each message in messages
