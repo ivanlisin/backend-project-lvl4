@@ -4,7 +4,15 @@ block header
   = t('views.tasks.title')
 
 block content
-  a.btn.btn-primary(href=route('newTask'))= t('views.tasks.new.button')
+  a.btn.btn-primary.mb-3(href=route('newTask'))= t('views.tasks.new.button')
+  +filter(route('tasks'), 'get')(class='mb-3')
+    .row
+      .col-12.col-md
+        +inlineSelect(searchedTask, 'statusId', t('views.tasks.status'), statusSelectData)
+      .col-12.col-md
+        +inlineSelect(searchedTask, 'executorId', t('views.tasks.executor'), userSelectData)
+      .col-12.col-md
+        +inlineSelect(searchedTask, 'labelID', t('views.tasks.label'), labelSelectData)
   table.table.table-striped
     thead
       tr
