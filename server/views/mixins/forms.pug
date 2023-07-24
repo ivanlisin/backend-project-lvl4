@@ -61,6 +61,9 @@ mixin select(entity, propertyName, labelName, options)
     if !_.isEmpty(propertyErrors)
       .invalid-feedback= propertyErrors.map(({ message }) => message).join('. ')
 
+mixin columnSelect(entity, propertyName, labelName, options)
+  +select(entity, propertyName, labelName, options)&attributes(attributes)
+
 mixin inlineSelect(entity, propertyName, labelName, options)
   - propertyErrors = _.get(errors, propertyName)
   - classLine = 'form-control' + (_.isEmpty(propertyErrors) ? '' : ' is-invalid')
