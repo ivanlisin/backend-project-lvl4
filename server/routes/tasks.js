@@ -3,6 +3,17 @@
 import _ from 'lodash';
 import i18next from 'i18next';
 
+const buildSearchedTask = (app, req) => {
+  const { status, executor, label } = req.params;
+  const task = new app.objection.models.task();
+  task.$set({
+    statusId: status,
+    executorId: executor,
+    labelID: label,
+  });
+  return task;
+};
+
 const prepareDataForSelects = async (app) => {
   const statuses = await app.objection.models.status.query();
   const users = await app.objection.models.user.query();
@@ -30,7 +41,13 @@ export default (app) => {
     .get('/tasks', { name: 'tasks', preValidation: app.authenticate }, async (req, reply) => {
       const tasks = await app.objection.models.task.query()
         .withGraphFetched('[status, creator, executor]');
-      reply.render('tasks/index', { tasks });
+      const searchedTask = buildSearchedTask(app, req);
+      const dataForSelects = await prepareDataForSelects(app);
+      reply.render('tasks/index', {
+        tasks,
+        searchedTask,
+        ...dataForSelects,
+      });
       return reply;
     })
     .get('/tasks/new', { name: 'newTask', preValidation: app.authenticate }, async (req, reply) => {
