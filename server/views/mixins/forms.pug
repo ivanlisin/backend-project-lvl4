@@ -41,7 +41,7 @@ mixin textarea(entity, propertyName, labelName)
 
 mixin select(entity, propertyName, labelName, options, inlineStyle = false)
   - propertyErrors = _.get(errors, propertyName)
-  - classLine = 'form-control' + (_.isEmpty(propertyErrors) ? '' : ' is-invalid')
+  - classLine = 'form-select' + (_.isEmpty(propertyErrors) ? '' : ' is-invalid')
   - selectId = getFieldId(propertyName)
   .mb-3(class = inlineStyle ? 'input-group' : '')
     label(
