@@ -7,6 +7,7 @@ mixin formFor(entity = null)
 
 mixin input(entity, propertyName, labelName, errors = {})
   - propertyErrors = _.get(errors, propertyName)
+  // TODO: возможно тут нужен form-input класс вместо form-control
   - classLine = 'form-control' + (_.isEmpty(propertyErrors) ? '' : ' is-invalid')
   - inputId = getFieldId(propertyName)
   .mb-3(class=(errors[propertyName] && 'has-danger'))
@@ -24,6 +25,7 @@ mixin input(entity, propertyName, labelName, errors = {})
 
 mixin textarea(entity, propertyName, labelName)
   - propertyErrors = _.get(errors, propertyName)
+  // TODO: возможно тут нужен form-textarea класс вместо form-control
   - classLine = 'form-control' + (_.isEmpty(propertyErrors) ? '' : ' is-invalid')
   - textareaId = getFieldId(propertyName)
   .mb-3
