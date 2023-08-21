@@ -8,11 +8,11 @@ block content
   +filter(route('tasks'), 'get')(class='mb-3')
     .row
       .col-12.col-md
-        +select(searchedTask, 'statusId', t('views.tasks.status'), statusSelectData, true)
+        +select(taskForFilter, 'statusId', t('views.tasks.status'), statusSelectData, { inlineStyle: true, selectName: 'status' })
       .col-12.col-md
-        +select(searchedTask, 'executorId', t('views.tasks.executor'), userSelectData, true)
+        +select(taskForFilter, 'executorId', t('views.tasks.executor'), userSelectData, { inlineStyle: true, selectName: 'executor' })
       .col-12.col-md
-        +select(searchedTask, 'labelID', t('views.tasks.label'), labelSelectData, true)
+        +select(taskForFilter, 'labelId', t('views.tasks.label'), labelSelectData, { inlineStyle: true, selectName: 'label' })
   table.table.table-striped
     thead
       tr

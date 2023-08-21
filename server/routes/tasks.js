@@ -3,16 +3,22 @@
 import _ from 'lodash';
 import i18next from 'i18next';
 
-const buildSearchedTask = (app, req) => {
-  const { status, executor, label } = req.params;
+const buildTaskForFilter = (app, req) => {
+  const { status, executor, label } = req.query;
   const task = new app.objection.models.task();
   task.$set({
-    statusId: status,
-    executorId: executor,
-    labelID: label,
+    statusId: status === '' ? null : parseInt(status, 10),
+    executorId: executor === '' ? null : parseInt(executor, 10),
+    labelId: label === '' ? null : parseInt(label, 10),
   });
   return task;
 };
+
+const filterTask = (taskForFilter, tasks) => tasks
+  .filter((task) => taskForFilter.statusId === null || taskForFilter.statusId === task.statusId)
+  // eslint-disable-next-line max-len
+  .filter((task) => taskForFilter.executorId === null || taskForFilter.executorId === task.executorId)
+  .filter((task) => taskForFilter.labelId === null || taskForFilter.labelId === task.labelId);
 
 const prepareDataForSelects = async (app) => {
   const statuses = await app.objection.models.status.query();
@@ -39,13 +45,14 @@ const prepareDataForSelects = async (app) => {
 export default (app) => {
   app
     .get('/tasks', { name: 'tasks', preValidation: app.authenticate }, async (req, reply) => {
+      const taskForFilter = buildTaskForFilter(app, req);
       const tasks = await app.objection.models.task.query()
         .withGraphFetched('[status, creator, executor]');
-      const searchedTask = buildSearchedTask(app, req);
+      const filteredTasks = filterTask(taskForFilter, tasks);
       const dataForSelects = await prepareDataForSelects(app);
       reply.render('tasks/index', {
-        tasks,
-        searchedTask,
+        tasks: filteredTasks,
+        taskForFilter,
         ...dataForSelects,
       });
       return reply;
