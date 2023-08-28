@@ -4,7 +4,7 @@ import _ from 'lodash';
 import i18next from 'i18next';
 
 const buildTaskForFilter = (app, req) => {
-  const { status, executor, label } = req.query;
+  const { status = '', executor = '', label = '' } = req.query;
   const task = new app.objection.models.task();
   task.$set({
     statusId: status === '' ? null : parseInt(status, 10),
