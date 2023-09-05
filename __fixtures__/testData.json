@@ -24,7 +24,8 @@
       "description": "Товар доставили вчера. Необходимо проверить его состояние. И принять дальнейшее решение",
       "statusId": 1,
       "creatorId": 2,
-      "executorId": 2
+      "executorId": 2,
+      "labelId": 1
     }
   }
 }

@@ -84,7 +84,7 @@ describe('test statuses CRUD', () => {
     const expected = {
       ...params,
     };
-    const status = await models.status.query().findOne({ name: params.name });
+    const status = await models.task.query().findOne({ name: params.name });
     expect(status).toMatchObject(expected);
   });
 
