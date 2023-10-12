@@ -11,6 +11,12 @@
       "lastName": "Kulas",
       "email": "lawrence.kulas87@outlook.com",
       "password": "O6AvLIQL1cbzrre"
+    },
+    "validationError": {
+      "firstName": "",
+      "lastName": "",
+      "email": "123",
+      "password": ""
     }
   },
   "statuses": {

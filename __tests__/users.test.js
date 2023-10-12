@@ -26,11 +26,13 @@ describe('test users CRUD', () => {
     // тесты не должны зависеть друг от друга
     // перед каждым тестом выполняем миграции
     // и заполняем БД тестовыми данными
-    await knex.migrate.latest();
-    await prepareData(app);
+    // await knex.migrate.latest();
+    // await prepareData(app);
   });
 
   beforeEach(async () => {
+    await knex.migrate.latest();
+    await prepareData(app);
   });
 
   it('index', async () => {
@@ -70,10 +72,27 @@ describe('test users CRUD', () => {
     expect(user).toMatchObject(expected);
   });
 
+  it('user data validation error', async () => {
+    const params = testData.users.validationError;
+    const response = await app.inject({
+      method: 'POST',
+      url: app.reverse('users'),
+      payload: {
+        data: params,
+      },
+    });
+
+    expect(response.statusCode).toBe(200);
+    const expected = {};
+    const { errors } = response.data;
+    expect(errors).toMatchObject(expected);
+  });
+
   afterEach(async () => {
     // Пока Segmentation fault: 11
     // после каждого теста откатываем миграции
     // await knex.migrate.rollback();
+    await knex.migrate.rollback();
   });
 
   afterAll(async () => {
