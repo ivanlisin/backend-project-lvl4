@@ -33,10 +33,10 @@ export default (app) => {
         await app.objection.models.user.query().insert(validUser);
         req.flash('info', i18next.t('flash.users.create.success'));
         reply.redirect(app.reverse('root'));
-      } catch ({ data }) {
+      } catch (e) {
+        console.error(e);
         req.flash('error', i18next.t('flash.users.create.error'));
-        // console.log(data);
-        reply.render('users/new', { user, errors: data });
+        reply.render('users/new', { user, errors: e.data });
       }
 
       return reply;
